@@ -1,0 +1,64 @@
+/* Generated for rothko (MT6989 D9300+, 6.1.138-android14-11) */
+#ifndef TARGET_H
+#define TARGET_H
+
+/* target profile */
+#define KIMAGE_TEXT_BASE 0xffffffc008000000ULL
+#define P0_PAGE_OFFSET 0xffffff8000000000ULL
+#define P0_PHYS_OFFSET 0x40000000ULL
+#define P0_KERNEL_PHYS_LOAD 0x40000000ULL
+#define PSELECT_WAITER_WORD_SHIFT 2
+
+/* kernel image addresses */
+#define INIT_TASK 0xffffffc009fef600ULL
+#define INIT_CRED 0xffffffc00a001a68ULL
+#define ENTRY_TASK 0xffffffc009fac318ULL
+#define PER_CPU_OFFSET 0xffffffc009fdb650ULL
+#define ROOT_TASK_GROUP 0xffffffc00a1d7580ULL
+#define SELINUX_ENFORCING 0xffffffc00a2293d0ULL
+
+/* KASLR anchors (slide=0, fixed kimage_vaddr) */
+#define SLIDE_NFULNL_LOGGER_IMAGE 0xffffffc008000000ULL
+#define SLIDE_LOGGERS_0_1_IMAGE 0xffffffc008000000ULL
+#define SLIDE_RANDOM_BOOT_ID_DATA_IMAGE 0xffffffc008000000ULL
+#define SLIDE_INIT_TASK_IMAGE 0xffffffc009fef600ULL
+#define SLIDE_ROOT_TASK_GROUP_IMAGE 0xffffffc00a1d7580ULL
+
+/* waiter fields (rt_mutex_waiter) */
+#define WAITER_TREE_ENTRY_OFF 0
+#define WAITER_PI_TREE_ENTRY_OFF 24
+#define WAITER_TASK_OFF 48
+#define WAITER_LOCK_OFF 56
+#define WAITER_WAKE_STATE_OFF 64
+#define WAITER_PRIO_OFF 68
+#define WAITER_DEADLINE_OFF 72
+#define WAITER_WW_CTX_OFF 80
+
+/* fake waiter (same offsets as real waiter) */
+#define FAKE_WAITER_TREE_PRIO_OFF 68
+#define FAKE_WAITER_TREE_DEADLINE_OFF 72
+#define FAKE_WAITER_PI_TREE_ENTRY_OFF 24
+#define FAKE_WAITER_PI_TREE_PRIO_OFF 28
+#define FAKE_WAITER_PI_TREE_DEADLINE_OFF 32
+#define FAKE_WAITER_TASK_OFF 48
+#define FAKE_WAITER_LOCK_OFF 56
+#define FAKE_WAITER_WAKE_STATE_OFF 64
+#define FAKE_WAITER_WW_CTX_OFF 80
+
+/* fake task fields (task_struct) */
+#define FAKE_TASK_USAGE_OFF 64
+#define FAKE_TASK_PRIO_OFF 132
+#define FAKE_TASK_NORMAL_PRIO_OFF 140
+#define FAKE_TASK_TASK_GROUP_OFF 840
+#define FAKE_TASK_PI_LOCK_OFF 2340
+#define FAKE_TASK_PI_WAITERS_OFF 2360
+#define FAKE_TASK_PI_TOP_TASK_OFF 2376
+#define FAKE_TASK_PI_BLOCKED_ON_OFF 2384
+#define FAKE_TASK_UCLAMP_REQ_OFF 848
+#define FAKE_TASK_UCLAMP_OFF 856
+
+/* task credential pointers */
+#define TASK_REAL_CRED_OFF 2096
+#define TASK_CRED_OFF 2104
+
+#endif
