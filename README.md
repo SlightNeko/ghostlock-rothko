@@ -14,49 +14,16 @@ Kernel: `6.1.138-android14-11` / HyperOS OS3.0.302.0.WNNCNXM.
 
 从 [GitHub Releases](https://github.com/SlightNeko/ghostlock-rothko/releases) 下载最新的 `ghostlock_rothko_strip`。
 
-## 🚀 测试方法
-
-### 方法 1：通过 ADB
+## 🚀 测试方法（注入式提权）
 
 ```bash
-# 推送二进制到设备
-adb push ghostlock_rothko_strip /data/local/tmp/
-
-# 赋予执行权限
-adb shell chmod 755 /data/local/tmp/ghostlock_rothko_strip
-
-# 运行（可能立即重启）
-adb shell /data/local/tmp/ghostlock_rothko_strip
-```
-
-### 方法 2：通过 Shizuku
-
-前提：Shizuku 已启动（无线调试授权），有任一终端 App（如 Termux）已授权 Shizuku。
-
-```bash
-# 用 adb 把 binary 推到设备
-adb push ghostlock_rothko_strip /data/local/tmp/
-adb shell chmod 755 /data/local/tmp/ghostlock_rothko_strip
-
-# 在 Termux 里（已授权 Shizuku）直接执行：
-adb shell /data/local/tmp/ghostlock_rothko_strip
-```
-
-如果不想连电脑，先把文件传到手机，然后在 Termux 里：
-
-```bash
-cp /sdcard/Download/ghostlock_rothko_strip /data/local/tmp/
-chmod 755 /data/local/tmp/ghostlock_rothko_strip
-/data/local/tmp/ghostlock_rothko_strip
-```
-
-### 方法 3：LD_PRELOAD 注入模式
-
-```bash
+# 从 Release 下载 ghostlock_rothko_strip 和 preload.so 推送到设备
 adb push preload.so /data/local/tmp/
-adb shell
-cd /data/local/tmp
-LD_PRELOAD=./preload.so /system/bin/sh -c exit
+adb push ghostlock_rothko_strip /data/local/tmp/
+adb shell chmod 755 /data/local/tmp/ghostlock_rothko_strip
+
+# 通过 LD_PRELOAD 注入触发提权
+adb shell LD_PRELOAD=/data/local/tmp/preload.so /data/local/tmp/ghostlock_rothko_strip
 ```
 
 ## 📋 预期行为
